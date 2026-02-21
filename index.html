@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"
+    />
+    <title>✨ سایت نهایی | ذرات + ویترین + ساعت + منو</title>
+
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- فونت وزیر -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap"
+    />
+
+    <style>
+      /* ========== RESET & VARIABLES ========== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      :root {
+        --primary-dark: #ff0000;
+        --secondary-dark: #ff3366;
+        --accent-dark: #ff9900;
+        --bg-dark: #0a0a0a;
+        --text-dark: #ffffff;
+        --card-dark: rgba(255, 0, 0, 0.1);
+        --border-dark: rgba(255, 0, 0, 0.3);
+        --gradient-dark: linear-gradient(135deg, #ff0000, #ff3366, #ff9900);
+
+        --primary-light: #0066ff;
+        --secondary-light: #00ccff;
+        --accent-light: #9966ff;
+        --bg-light: #ffffff;
+        --text-light: #000000;
+        --card-light: rgba(0, 102, 255, 0.1);
+        --border-light: rgba(0, 102, 255, 0.3);
+        --gradient-light: linear-gradient(135deg, #0066ff, #00ccff, #9966ff);
+
+        --glow-dark: 0 0 30px rgba(255, 0, 0, 0.5);
+        --glow-light: 0 0 30px rgba(0, 102, 255, 0.5);
+      }
+
+      body {
+        font-family: "Vazirmatn", sans-serif;
+        background: var(--bg-dark);
+        color: var(--text-dark);
+        min-height: 100vh;
+        overflow-x: hidden;
+        transition: background-color 0.4s ease, color 0.4s ease;
+      }
+
+      body.light {
+        background: var(--bg-light);
+        color: var(--text-light);
+      }
+
+      /* ========== LOADING BAR ========== */
+      .loading-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--gradient-dark);
+        z-index: 10000;
+        transform-origin: left;
+        animation: loading 2s ease-out;
+      }
+
+      @keyframes loading {
+        0% {
+          transform: scaleX(0);
+        }
+        50% {
+          transform: scaleX(0.7);
+        }
+        100% {
+          transform: scaleX(1);
+        }
+      }
+
+      /* ========== PARTICLES CANVAS ========== */
+      #particlesCanvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      /* ========== HEADER ========== */
+      .main-header {
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(20px);
+        padding: 15px 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        border-bottom: 3px solid transparent;
+        border-image: var(--gradient-dark);
+        border-image-slice: 1;
+        box-shadow: var(--glow-dark);
+        animation: slideDown 0.8s ease-out;
+      }
+
+      body.light .main-header {
+        background: rgba(255, 255, 255, 0.95);
+        border-image: var(--gradient-light);
+        box-shadow: var(--glow-light);
+      }
+
+      @keyframes slideDown {
+        from {
+          transform: translateY(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .header-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: 900;
+        background: var(--gradient-dark);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      body.light .logo {
+        background: var(--gradient-light);
+        -webkit-background-clip: text;
+      }
+
+      .logo i {
+        font-size: 2rem;
+        animation: spinLogo 10s linear infinite;
+      }
+
+      @keyframes spinLogo {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .nav-menu {
+        display: flex;
+        gap: 15px;
+        list-style: none;
+        flex-wrap: wrap;
+      }
+
+      .nav-link {
+        color: var(--text-dark);
+        text-decoration: none;
+        font-weight: 600;
+        padding: 10px 20px;
+        border-radius: 30px;
+        transition: all 0.4s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 1rem;
+      }
+
+      body.light .nav-link {
+        color: var(--text-light);
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        background: var(--gradient-dark);
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: var(--glow-dark);
+      }
+
+      /* ========== CLOCK ========== */
+      .clock-container {
+        position: fixed;
+        top: 90px;
+        right: 20px;
+        z-index: 999;
+      }
+
+      .clock-wrapper {
+        background: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(15px);
+        padding: 15px 20px;
+        border-radius: 15px;
+        border: 2px solid var(--primary-dark);
+        box-shadow: var(--glow-dark);
+        text-align: center;
+        min-width: 180px;
+      }
+
+      body.light .clock-wrapper {
+        background: rgba(255, 255, 255, 0.95);
+        border: 2px solid var(--primary-light);
+        box-shadow: var(--glow-light);
+      }
+
+      .digital-clock {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--primary-dark);
+        margin-bottom: 5px;
+      }
+
+      body.light .digital-clock {
+        color: var(--primary-light);
+      }
+
+      .date-display {
+        font-size: 1rem;
+        opacity: 0.9;
+      }
+
+      /* ========== THEME BUTTON ========== */
+      .theme-toggle {
+        position: fixed;
+        top: 90px;
+        left: 20px;
+        z-index: 999;
+      }
+
+      .theme-btn {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: var(--gradient-dark);
+        border: none;
+        color: white;
+        font-size: 1.8rem;
+        cursor: pointer;
+        transition: all 0.5s;
+        box-shadow: var(--glow-dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      body.light .theme-btn {
+        background: var(--gradient-light);
+        box-shadow: var(--glow-light);
+      }
+
+      .theme-btn:hover {
+        transform: rotate(180deg) scale(1.1);
+      }
+
+      /* ========== MAIN CONTENT ========== */
+      .main-content {
+        max-width: 1400px;
+        margin: 130px auto 40px;
+        padding: 0 20px;
+      }
+
+      .section {
+        margin: 80px 0;
+        padding: 60px 0;
+        border-radius: 30px;
+      }
+
+      .section:nth-child(odd) {
+        background: rgba(255, 0, 0, 0.03);
+      }
+
+      body.light .section:nth-child(odd) {
+        background: rgba(0, 102, 255, 0.03);
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 50px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        background: var(--gradient-dark);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      body.light .section-title {
+        background: var(--gradient-light);
+        -webkit-background-clip: text;
+      }
+
+      /* ========== HERO SECTION ========== */
+      #home {
+        text-align: center;
+        padding: 100px 0;
+      }
+
+      .hero-title {
+        font-size: 3.5rem;
+        font-weight: 900;
+        margin-bottom: 25px;
+        background: var(--gradient-dark);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: titleFloat 3s ease-in-out infinite;
+      }
+
+      @keyframes titleFloat {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .hero-subtitle {
+        font-size: 1.3rem;
+        max-width: 700px;
+        margin: 0 auto 40px;
+        line-height: 1.8;
+        opacity: 0.9;
+      }
+
+      .hero-stats {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+      }
+
+      .stat-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(15px);
+        padding: 25px 35px;
+        border-radius: 20px;
+        border: 2px solid var(--primary-dark);
+        min-width: 160px;
+        text-align: center;
+        transition: all 0.4s;
+      }
+
+      body.light .stat-card {
+        background: rgba(0, 0, 0, 0.03);
+        border: 2px solid var(--primary-light);
+      }
+
+      .stat-card:hover {
+        transform: translateY(-10px) scale(1.05);
+        box-shadow: var(--glow-dark);
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: var(--primary-dark);
+      }
+
+      body.light .stat-number {
+        color: var(--primary-light);
+      }
+
+      /* ========== VITRINE (جایگزین اسلایدر) ========== */
+      #vitrine {
+        padding: 60px 0;
+      }
+
+      .vitrine-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .vitrine-item {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(15px);
+        border-radius: 25px;
+        overflow: hidden;
+        border: 2px solid var(--primary-dark);
+        transition: all 0.5s;
+        position: relative;
+      }
+
+      body.light .vitrine-item {
+        background: rgba(0, 0, 0, 0.03);
+        border: 2px solid var(--primary-light);
+      }
+
+      .vitrine-item:hover {
+        transform: translateY(-15px) scale(1.02);
+        box-shadow: var(--glow-dark);
+      }
+
+      .vitrine-image {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        transition: transform 0.8s;
+      }
+
+      .vitrine-item:hover .vitrine-image {
+        transform: scale(1.1);
+      }
+
+      .vitrine-content {
+        padding: 25px;
+        text-align: center;
+      }
+
+      .vitrine-icon {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+        color: var(--primary-dark);
+      }
+
+      body.light .vitrine-icon {
+        color: var(--primary-light);
+      }
+
+      .vitrine-content h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: var(--primary-dark);
+      }
+
+      body.light .vitrine-content h3 {
+        color: var(--primary-light);
+      }
+
+      .vitrine-content p {
+        font-size: 1rem;
+        line-height: 1.6;
+        opacity: 0.9;
+      }
+
+      .vitrine-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: var(--gradient-dark);
+        color: white;
+        padding: 8px 15px;
+        border-radius: 25px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        z-index: 2;
+      }
+
+      body.light .vitrine-badge {
+        background: var(--gradient-light);
+      }
+
+      /* ========== SERVICES GRID ========== */
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+      }
+
+      .service-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(15px);
+        border: 2px solid var(--primary-dark);
+        border-radius: 20px;
+        padding: 40px 25px;
+        text-align: center;
+        transition: all 0.4s;
+      }
+
+      body.light .service-card {
+        background: rgba(0, 0, 0, 0.03);
+        border: 2px solid var(--primary-light);
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--glow-dark);
+      }
+
+      .service-icon {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        color: var(--primary-dark);
+      }
+
+      body.light .service-icon {
+        color: var(--primary-light);
+      }
+
+      .service-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+      }
+
+      /* ========== ABOUT SECTION ========== */
+      .about-content {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      .about-text p {
+        font-size: 1.1rem;
+        line-height: 1.9;
+        margin-bottom: 20px;
+      }
+
+      .about-stats {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .about-stat {
+        flex: 1;
+        min-width: 120px;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 25px;
+        border-radius: 15px;
+        text-align: center;
+        border: 2px solid var(--primary-dark);
+      }
+
+      body.light .about-stat {
+        background: rgba(0, 0, 0, 0.03);
+        border: 2px solid var(--primary-light);
+      }
+
+      .about-stat i {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        color: var(--primary-dark);
+      }
+
+      body.light .about-stat i {
+        color: var(--primary-light);
+      }
+
+      .about-stat h4 {
+        font-size: 1.8rem;
+        color: var(--primary-dark);
+      }
+
+      body.light .about-stat h4 {
+        color: var(--primary-light);
+      }
+
+      /* ========== CONTACT FORM ========== */
+      .contact-form {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 15px 20px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid var(--primary-dark);
+        border-radius: 12px;
+        color: var(--text-dark);
+        font-family: "Vazirmatn";
+        font-size: 1rem;
+      }
+
+      body.light .form-control {
+        background: rgba(0, 0, 0, 0.03);
+        border: 2px solid var(--primary-light);
+        color: var(--text-light);
+      }
+
+      .form-control:focus {
+        outline: none;
+        box-shadow: var(--glow-dark);
+      }
+
+      .submit-btn {
+        background: var(--gradient-dark);
+        color: white;
+        border: none;
+        padding: 15px 40px;
+        border-radius: 30px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 0.4s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+      }
+
+      body.light .submit-btn {
+        background: var(--gradient-light);
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--glow-dark);
+      }
+
+      /* ========== FOOTER ========== */
+      .main-footer {
+        background: rgba(0, 0, 0, 0.95);
+        padding: 60px 0 30px;
+        margin-top: 100px;
+        border-top: 3px solid var(--primary-dark);
+      }
+
+      body.light .main-footer {
+        background: rgba(255, 255, 255, 0.95);
+        border-top: 3px solid var(--primary-light);
+      }
+
+      .footer-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+        margin-bottom: 50px;
+      }
+
+      .footer-column h4 {
+        font-size: 1.4rem;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--primary-dark);
+      }
+
+      body.light .footer-column h4 {
+        color: var(--primary-light);
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 15px;
+      }
+
+      .footer-links a {
+        color: var(--text-dark);
+        text-decoration: none;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      body.light .footer-links a {
+        color: var(--text-light);
+      }
+
+      .footer-links a:hover {
+        color: var(--primary-dark);
+        padding-right: 8px;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+
+      .social-link {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: var(--gradient-dark);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: all 0.3s;
+      }
+
+      body.light .social-link {
+        background: var(--gradient-light);
+      }
+
+      .social-link:hover {
+        transform: translateY(-5px) rotate(10deg);
+      }
+
+      .copyright {
+        text-align: center;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 1rem;
+      }
+
+      body.light .copyright {
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      /* ========== SCROLL TO TOP ========== */
+      .scroll-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 55px;
+        height: 55px;
+        background: var(--gradient-dark);
+        border-radius: 50%;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        box-shadow: var(--glow-dark);
+        z-index: 999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s;
+      }
+
+      body.light .scroll-top {
+        background: var(--gradient-light);
+        box-shadow: var(--glow-light);
+      }
+
+      .scroll-top.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .scroll-top:hover {
+        transform: translateY(-8px);
+      }
+
+      /* ========== NOTIFICATION ========== */
+      .notification {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        background: var(--gradient-dark);
+        color: white;
+        padding: 20px 25px;
+        border-radius: 15px;
+        box-shadow: var(--glow-dark);
+        z-index: 999;
+        transform: translateX(400px);
+        transition: transform 0.5s;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        max-width: 320px;
+      }
+
+      body.light .notification {
+        background: var(--gradient-light);
+        box-shadow: var(--glow-light);
+      }
+
+      .notification.show {
+        transform: translateX(0);
+      }
+
+      /* ========== RESPONSIVE ========== */
+      @media (max-width: 992px) {
+        .vitrine-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .header-container {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .nav-menu {
+          justify-content: center;
+        }
+
+        .nav-link {
+          padding: 8px 15px;
+          font-size: 0.9rem;
+        }
+
+        .clock-container {
+          top: 140px;
+          right: 15px;
+        }
+
+        .clock-wrapper {
+          min-width: 150px;
+          padding: 12px;
+        }
+
+        .digital-clock {
+          font-size: 1.5rem;
+        }
+
+        .theme-toggle {
+          top: 140px;
+          left: 15px;
+        }
+
+        .theme-btn {
+          width: 50px;
+          height: 50px;
+          font-size: 1.5rem;
+        }
+
+        .main-content {
+          margin-top: 160px;
+        }
+
+        .hero-title {
+          font-size: 2.5rem;
+        }
+
+        .vitrine-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .about-stats {
+          flex-direction: column;
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .footer-column h4 {
+          justify-content: center;
+        }
+
+        .footer-links a {
+          justify-content: center;
+        }
+
+        .social-links {
+          justify-content: center;
+        }
+
+        .notification {
+          bottom: 80px;
+          right: 20px;
+          max-width: 280px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero-title {
+          font-size: 2rem;
+        }
+
+        .hero-stats {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .stat-card {
+          width: 100%;
+        }
+
+        .vitrine-image {
+          height: 200px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading Bar -->
+    <div class="loading-bar"></div>
+
+    <!-- Particles Canvas -->
+    <canvas id="particlesCanvas"></canvas>
+
+    <!-- Header -->
+    <header class="main-header">
+      <div class="header-container">
+        <a href="#home" class="logo">
+          <i class="fas fa-gem"></i>
+          <span>nitsonito</span>
+        </a>
+
+        <nav>
+          <ul class="nav-menu">
+            <li>
+              <a href="#home" class="nav-link active">
+                <i class="fas fa-home"></i> خانه
+              </a>
+            </li>
+            <li>
+              <a href="#vitrine" class="nav-link">
+                <i class="fas fa-store"></i> ویترین
+              </a>
+            </li>
+            <li>
+              <a href="#services" class="nav-link">
+                <i class="fas fa-cogs"></i> خدمات
+              </a>
+            </li>
+            <li>
+              <a href="#about" class="nav-link">
+                <i class="fas fa-info-circle"></i> درباره
+              </a>
+            </li>
+            <li>
+              <a href="#contact" class="nav-link">
+                <i class="fas fa-phone"></i> تماس
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Clock -->
+    <div class="clock-container">
+      <div class="clock-wrapper">
+        <div class="digital-clock" id="digitalClock">۰۰:۰۰:۰۰</div>
+        <div class="date-display" id="dateDisplay">--/--/----</div>
+      </div>
+    </div>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+      <button class="theme-btn" id="themeBtn">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Home Section -->
+      <section id="home" class="section">
+        <h1 class="hero-title">✨nitsonito✨</h1>
+        <p class="hero-subtitle">this website ctared by nitson</p>
+
+        <div class="hero-stats">
+          <div class="stat-card">
+            <p>game dev</p>
+          </div>
+          <div class="stat-card">
+            <p>website dev</p>
+          </div>
+          <div class="stat-card">
+            <p>youtube</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Vitrine Section (جایگزین اسلایدر) -->
+      <section id="vitrine" class="section">
+        <h2 class="section-title">
+          <i class="fas fa-store-alt"></i>
+          showcase
+        </h2>
+
+        <div class="vitrine-grid">
+          <!-- آیتم ۱ -->
+          <div class="vitrine-item">
+            <div class="vitrine-badge">basketball</div>
+            <img
+              src="a66b4aad-28dc-4e69-997e-6aaef6bf41a3.jfif"
+              alt="Stephen Curry"
+              class="vitrine-image"
+              loading="lazy"
+            />
+            <div class="vitrine-content">
+              <i class="fas fa-tree vitrine-icon"></i>
+              <h3>Stephen Curry</h3>
+              <p>Three points😉</p>
+            </div>
+          </div>
+
+          <!-- آیتم ۲ -->
+          <div class="vitrine-item">
+            <div class="vitrine-badge">dota2</div>
+            <img
+              src="rakuzan sf)).jfif"
+              alt="sf"
+              class="vitrine-image"
+              loading="lazy"
+            />
+            <div class="vitrine-content">
+              <i class="fas fa-star vitrine-icon"></i>
+              <h3>shadow find</h3>
+              <p>out played</p>
+            </div>
+          </div>
+
+          <!-- آیتم ۳ -->
+          <div class="vitrine-item">
+            <div class="vitrine-badge">cat</div>
+            <img
+              src="9368b983-5821-4858-97cf-ac15b8e33d92.jfif"
+              alt="شهر مدرن"
+              class="vitrine-image"
+              loading="lazy"
+            />
+            <div class="vitrine-content">
+              <i class="fas fa-city vitrine-icon"></i>
+              <h3>smoker cat</h3>
+              <p>..</p>
+            </div>
+          </div>
+
+          <!-- آیتم ۴ -->
+          <div class="vitrine-item">
+            <div class="vitrine-badge">dev</div>
+            <img
+              src="323495ef-9937-4fbc-ae8e-1d54ac924b37.jfif"
+              alt="dev man"
+              class="vitrine-image"
+              loading="lazy"
+            />
+            <div class="vitrine-content">
+              <i class="fas fa-leaf vitrine-icon"></i>
+              <h3>developer</h3>
+              <p>....</p>
+            </div>
+          </div>
+
+          <!-- آیتم ۵ -->
+          <div class="vitrine-item">
+            <div class="vitrine-badge">bunny</div>
+            <img
+              src="188cb045-0651-4bc1-879c-e8a0a1075276.jfif"
+              alt="bunny man"
+              class="vitrine-image"
+              loading="lazy"
+            />
+            <div class="vitrine-content">
+              <i class="fas fa-mountain vitrine-icon"></i>
+              <h3>bunny</h3>
+              <p>bunny man</p>
+            </div>
+          </div>
+
+          <!-- آیتم ۶ -->
+          <div class="vitrine-item">
+            <div class="vitrine-badge">dota2</div>
+            <img
+              src="падж.jfif"
+              alt="pudge"
+              class="vitrine-image"
+              loading="lazy"
+            />
+            <div class="vitrine-content">
+              <i class="fas fa-cloud-sun vitrine-icon"></i>
+              <h3>pudge</h3>
+              <p>hook miss</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Section -->
+      <section id="services" class="section">
+        <h2 class="section-title">
+          <i class="fas fa-cogs"></i>
+          خدمات ما
+        </h2>
+
+        <div class="services-grid">
+          <div class="service-card">
+            <i class="fas fa-code service-icon"></i>
+            <h3>توسعه وب</h3>
+            <p>طراحی و توسعه وبسایت‌های مدرن با جدیدترین تکنولوژی‌ها</p>
+          </div>
+          <div class="service-card">
+            <i class="fas fa-paint-brush service-icon"></i>
+            <h3>طراحی UI/UX</h3>
+            <p>ایجاد تجربه کاربری عالی و رابط‌های کاربری جذاب</p>
+          </div>
+          <div class="service-card">
+            <i class="fas fa-mobile-alt service-icon"></i>
+            <h3>ساخت و توسعه بازی</h3>
+            <p>ساخت و توسعه بازی برای موبایل و pc باunity</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about" class="section">
+        <h2 class="section-title">
+          <i class="fas fa-info-circle"></i>
+          درباره ما
+        </h2>
+
+        <div class="about-content">
+          <div class="about-text">
+            <p>این اولین پروژمه و همین اره یکوچولو با ai زدم😉</p>
+
+            <div class="about-stats">
+              <div class="about-stat">
+                <i class="fas fa-calendar-alt"></i>
+                <h4>0</h4>
+                <p>سال تجربه</p>
+              </div>
+              <div class="about-stat">
+                <i class="fas fa-project-diagram"></i>
+                <h4>1</h4>
+                <p>پروژه</p>
+              </div>
+              <div class="about-stat">
+                <i class="fas fa-users"></i>
+                <h4>0</h4>
+                <p>مشتری</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="section">
+        <h2 class="section-title">
+          <i class="fas fa-phone"></i>
+          تماس با ما
+        </h2>
+
+        <form class="contact-form" id="contactForm">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="نام شما"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="email"
+              class="form-control"
+              placeholder="ایمیل شما"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <textarea
+              class="form-control"
+              rows="4"
+              placeholder="پیام شما..."
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="submit-btn">
+            <span>ارسال پیام</span>
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h4><i class="fas fa-info-circle"></i> درباره ما</h4>
+            <p>this website crated by niton and some help from ai just some</p>
+            <div class="social-links">
+              <a href="#" class="social-link"
+                ><i class="fab fa-telegram"></i
+              ></a>
+              <a href="#" class="social-link"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+
+          <div class="footer-column">
+            <h4><i class="fas fa-link"></i> لینک‌ها</h4>
+            <ul class="footer-links">
+              <li>
+                <a href="#home"><i class="fas fa-home"></i> خانه</a>
+              </li>
+              <li>
+                <a href="#vitrine"><i class="fas fa-store"></i> ویترین</a>
+              </li>
+              <li>
+                <a href="#services"><i class="fas fa-cogs"></i> خدمات</a>
+              </li>
+              <li>
+                <a href="#about"><i class="fas fa-info-circle"></i> درباره</a>
+              </li>
+              <li>
+                <a href="#contact"><i class="fas fa-phone"></i> تماس</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h4><i class="fas fa-envelope"></i> تماس</h4>
+            <ul class="footer-links">
+              <li>
+                <a href="tel:+982112345678"
+                  ><i class="fas fa-phone"></i> 09908836889</a
+                >
+              </li>
+              <li>
+                <a href="mailto:info@example.com"
+                  ><i class="fas fa-envelope"></i> mhdsilver8@gmail.com</a
+                >
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-map-marker-alt"></i> نیشابور</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="copyright">
+          <p>© nitson dev</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <button class="scroll-top" id="scrollTop">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+      <i class="fas fa-bell"></i>
+      <div>
+        <strong>خوش آمدید!</strong>
+        <p>به ویترین جادویی خوش آمدید</p>
+      </div>
+    </div>
+
+    <script>
+      // ========== PARTICLES ==========
+      const canvas = document.getElementById("particlesCanvas");
+      const ctx = canvas.getContext("2d");
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resizeCanvas();
+      window.addEventListener("resize", resizeCanvas);
+
+      const mouse = { x: 0, y: 0, radius: 150 };
+
+      document.addEventListener("mousemove", (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      });
+
+      const particles = [];
+      const particleCount = Math.min(
+        150,
+        Math.floor((window.innerWidth * window.innerHeight) / 8000)
+      );
+
+      class Particle {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 2 + 1;
+          this.speedX = Math.random() * 0.3 - 0.15;
+          this.speedY = Math.random() * 0.3 - 0.15;
+          this.updateColor();
+        }
+
+        updateColor() {
+          const isLight = document.body.classList.contains("light");
+          this.color = isLight
+            ? "rgba(0, 102, 255, 0.5)"
+            : "rgba(255, 0, 0, 0.5)";
+        }
+
+        update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+
+          if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+          if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < mouse.radius) {
+            const angle = Math.atan2(dy, dx);
+            this.x -= Math.cos(angle) * 0.3;
+            this.y -= Math.sin(angle) * 0.3;
+          }
+        }
+
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = this.color;
+          ctx.fill();
+        }
+      }
+
+      function initParticles() {
+        particles.length = 0;
+        for (let i = 0; i < particleCount; i++) {
+          particles.push(new Particle());
+        }
+      }
+
+      function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach((p) => {
+          p.update();
+          p.draw();
+        });
+        requestAnimationFrame(animateParticles);
+      }
+
+      // ========== CLOCK ==========
+      function updateClock() {
+        const now = new Date();
+        const hours = now.getHours().toString().padStart(2, "0");
+        const minutes = now.getMinutes().toString().padStart(2, "0");
+        const seconds = now.getSeconds().toString().padStart(2, "0");
+
+        const day = now.getDate().toString().padStart(2, "0");
+        const month = (now.getMonth() + 1).toString().padStart(2, "0");
+        const year = now.getFullYear();
+
+        document.getElementById(
+          "digitalClock"
+        ).textContent = `${hours}:${minutes}:${seconds}`;
+        document.getElementById(
+          "dateDisplay"
+        ).textContent = `${year}/${month}/${day}`;
+      }
+
+      // ========== ACTIVE NAV ==========
+      function updateActiveNav() {
+        const sections = document.querySelectorAll(".section");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        let current = "";
+        const scrollPos = window.scrollY + 150;
+
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          const sectionBottom = sectionTop + section.offsetHeight;
+
+          if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href").substring(1) === current) {
+            link.classList.add("active");
+          }
+        });
+      }
+
+      // ========== SCROLL TOP ==========
+      const scrollTop = document.getElementById("scrollTop");
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 400) {
+          scrollTop.classList.add("show");
+        } else {
+          scrollTop.classList.remove("show");
+        }
+        updateActiveNav();
+      });
+
+      scrollTop.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      // ========== NOTIFICATION ==========
+      const notification = document.getElementById("notification");
+      setTimeout(() => {
+        notification.classList.add("show");
+        setTimeout(() => {
+          notification.classList.remove("show");
+        }, 4000);
+      }, 2000);
+
+      // ========== THEME ==========
+      const themeBtn = document.getElementById("themeBtn");
+
+      if (localStorage.getItem("theme") === "light") {
+        document.body.classList.add("light");
+        themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+      }
+
+      themeBtn.addEventListener("click", () => {
+        const isLight = document.body.classList.toggle("light");
+        themeBtn.innerHTML = isLight
+          ? '<i class="fas fa-moon"></i>'
+          : '<i class="fas fa-sun"></i>';
+        localStorage.setItem("theme", isLight ? "light" : "dark");
+        particles.forEach((p) => p.updateColor());
+      });
+
+      // ========== FORM ==========
+      document.getElementById("contactForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const btn = e.target.querySelector(".submit-btn");
+        btn.innerHTML = '<span>ارسال شد!</span> <i class="fas fa-check"></i>';
+        e.target.reset();
+        setTimeout(() => {
+          btn.innerHTML =
+            '<span>ارسال پیام</span> <i class="fas fa-paper-plane"></i>';
+        }, 2000);
+      });
+
+      // ========== SMOOTH SCROLL ==========
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            window.scrollTo({
+              top: target.offsetTop - 80,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+
+      // ========== INIT ==========
+      initParticles();
+      animateParticles();
+      updateClock();
+      setInterval(updateClock, 1000);
+      updateActiveNav();
+
+      console.log("✅ ویترین جایگزین اسلایدر شد!");
+      console.log("✨ ذرات: " + particleCount + " عدد");
+      console.log("🏪 ویترین: ۶ محصول");
+    </script>
+  </body>
+</html>
